@@ -30,13 +30,15 @@ const ReactionSchema = new Schema(
   }
 );
 
-const CommentSchema = new Schema(
+const ThoughtSchema = new Schema(
   {
-    writtenBy: {
+    thoughtText: {
       type: String,
-      required: true
+      required: true,
+      minlength: 1,
+      maxlength: 280
     },
-    commentBody: {
+    username: {
       type: String,
       required: true
     },
@@ -45,8 +47,8 @@ const CommentSchema = new Schema(
       default: Date.now,
       get: createdAtVal => dateFormat(createdAtVal)
     },
-    // use ReplySchema to validate data for a reply
-    replies: [ReplySchema]
+    // use Reaction Schema to validate data for a reply
+    reactions: [ReactionSchema]
   },
   {
     toJSON: {
@@ -57,10 +59,10 @@ const CommentSchema = new Schema(
   }
 );
 
-CommentSchema.virtual('replyCount').get(function() {
-  return this.replies.length;
+ThoughtSchema.virtual('reactionCount').get(function() {
+  return this.reactions.length;
 });
 
-const Comment = model('Comment', CommentSchema);
+const Thought = model('Thought', ThoughtSchema);
 
-module.exports = Comment;
+module.exports = Thought;
