@@ -3,7 +3,7 @@ const dateFormat = require('../utils/dateFormat');
 
 const UserSchema = new Schema(
   {
-    userName: {
+    username: {
       type: String,
       unique: true,
       required: true,
@@ -13,12 +13,11 @@ const UserSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      trim: true
       //validate using mongoose
     },
     thoughts: [
       {
-      type: Schema.Types.ObejctId,
+      type: Schema.Types.ObjectId,
       ref: 'Thought'
     } 
   ],
