@@ -1,17 +1,17 @@
-const { Schema, model, Types } = require('mongoose');
-const dateFormat = require('../utils/dateFormat');
+const { Schema, model, Types } = require("mongoose");
+const dateFormat = require("../utils/dateFormat");
 
 const ReactionSchema = new Schema(
   {
     // set custom id to avoid confusion with parent comment _id
     reactionId: {
       type: Schema.Types.ObjectId,
-      default: () => new Types.ObjectId()
+      default: () => new Types.ObjectId(),
     },
     reactionBody: {
       type: String,
       required: true,
-      maxlength: 280
+      maxlength: 280,
     },
     username: {
       type: String,
@@ -20,13 +20,13 @@ const ReactionSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      get: createdAtVal => dateFormat(createdAtVal)
-    }
+       get: (createdAtVal) => dateFormat(createdAtVal),
+    },
   },
   {
     toJSON: {
-      getters: true
-    }
+      getters: true,
+    },
   }
 );
 
@@ -36,33 +36,34 @@ const ThoughtSchema = new Schema(
       type: String,
       required: true,
       minlength: 1,
-      maxlength: 280
+      maxlength: 280,
     },
     username: {
       type: String,
-      required: true
+      required: true,
+       ref: "User",
     },
     createdAt: {
       type: Date,
       default: Date.now,
-      get: createdAtVal => dateFormat(createdAtVal)
+       get: (createdAtVal) => dateFormat(createdAtVal),
     },
     // use Reaction Schema to validate data for a reply
-    reactions: [ReactionSchema]
+    reactions: [ReactionSchema],
   },
   {
     toJSON: {
       virtuals: true,
-      getters: true
+      getters: true,
     },
-    id: false
+    id: false,
   }
 );
 
-ThoughtSchema.virtual('reactionCount').get(function() {
+ThoughtSchema.virtual("reactionCount").get(function () {
   return this.reactions.length;
 });
 
-const Thought = model('Thought', ThoughtSchema);
+const Thought = model("Thought", ThoughtSchema);
 
 module.exports = Thought;
