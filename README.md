@@ -64,7 +64,7 @@ npm start
 
 ## Demo
 
-<img src = "\utils\read-me.png">
+<img src = "utils\read-me.png">
 
 ## Documentation
 
