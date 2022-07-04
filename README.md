@@ -66,6 +66,8 @@ npm start
 
 <img src = "utils\read-me.png">
 
+[Link to full Demo](https://drive.google.com/file/d/1xTcDG_0OfmxAinWvDr8AQW7M-oVVdPtJ/view)
+
 ## Documentation
 
 - [npm](https://docs.npmjs.com/)
